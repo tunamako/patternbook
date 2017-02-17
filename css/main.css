@@ -1,12 +1,8 @@
-code {
-	font-family: Courier, serif;
-}
-
 * {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-h1, p{
+h1, header > p{
 	text-align: center;
 	margin: 0;
 }
@@ -14,7 +10,7 @@ h1, p{
 body{
 	margin: 0;
 	padding: 0;
-	font-size: 15px;
+	font-size: 13px;
 }
 
 nav {
@@ -49,12 +45,28 @@ nav ul li a:hover {
 
 h2 {
 	text-align: left;
-	margin-left: 300px;
-	margin-right: 300px;
+	margin-left: 14em;
 }
 
-h3, section > ul {
+h3, body > section > ul {
 	text-align: left;
-	margin-left: 350px;
-	margin-right: 350px;
+	margin-left: 21em;
+	margin-right: 21em;
+	margin-bottom: 5px;
+}
+
+section > p {
+	text-align: left;
+	margin-left: 25em;
+	margin-right: 25em;
+}
+
+code > pre {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 0.83em;
+	text-align: left;
+	margin-left: 20em;
+	margin-right: 20em;
+	margin-bottom: 0;
+	margin-top: 0;
 }
