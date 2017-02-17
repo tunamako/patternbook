@@ -6,8 +6,9 @@ code {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-h1 > p {
-	font-size: 15px;
+h1, p{
+	text-align: center;
+	margin: 0;
 }
 
 body{
@@ -46,29 +47,14 @@ nav ul li a:hover {
 	background-color: #e08b21;
 }
 
-nav li > ul{
-	display: none;
-	margin-top: 1px;
-	background-color: #e0e0e0;
-	box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
-	border-radius: 3px;
+h2 {
+	text-align: left;
+	margin-left: 300px;
+	margin-right: 300px;
 }
 
-nav li > ul li {
-	display: block;
-}
-
-nav li > ul li a {
-	color: #ba913d;
-	background-color: #e0e0e0;
-	display: block;
-	line-height: 1em;
-	border-radius: 3px;
-	padding: 0.25em 0.25em;
-	text-decoration: none;
-}
-
-nav li:hover > ul{
-	position: absolute;
-	display: block;
+h3, section > ul {
+	text-align: left;
+	margin-left: 350px;
+	margin-right: 350px;
 }
