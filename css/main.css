@@ -10,7 +10,7 @@ h1, header > p{
 body{
 	margin: 0;
 	padding: 0;
-	font-size: 13px;
+	font-size: 15px;
 }
 
 nav {
@@ -45,28 +45,35 @@ nav ul li a:hover {
 
 h2 {
 	text-align: left;
-	margin-left: 14em;
+	margin-left: 19em;
 }
 
 h3, body > section > ul {
 	text-align: left;
-	margin-left: 21em;
-	margin-right: 21em;
+	margin-left: 26em;
+	margin-right: 26em;
 	margin-bottom: 5px;
 }
 
 section > p {
 	text-align: left;
-	margin-left: 25em;
-	margin-right: 25em;
+	margin-left: 31em;
+	margin-right: 31em;
+}
+
+section > ul > li {
+	text-align: left;
+	font-size: 0.95em;
+	margin-left: 3em;
+	margin-right: 3em;
 }
 
 code > pre {
 	font-family: "Courier New", Courier, monospace;
 	font-size: 0.83em;
 	text-align: left;
-	margin-left: 20em;
-	margin-right: 20em;
+	margin-left: 27em;
+	margin-right: 27em;
 	margin-bottom: 0;
 	margin-top: 0;
 }

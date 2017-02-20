@@ -1,8 +1,8 @@
-<title>Pattern Book</title>
+<title>Change Superclass</title>
 <link rel="stylesheet" type="text/css" href="../css/main.css">
 <body>
 	<header>
-		<h1>Super Sexy CS326 Patternbook</h1>
+		<h1>CS326 Patternbook</h1>
 		<p>Michael Whalen</p>
 		<nav>
 			<ul>
@@ -15,16 +15,35 @@
 	</header>
 
 	<h2>Change Superclass</h2>
-	
-	<section>
-		<h3>Forces of Conflict</h3>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>Consider the situation where you have a class you've written, and would like
+		that class to behave nearly-identically to a class in another library. However,
+		you can't simply use an instance of that library's class due to small differences
+		in what it can do and the contexts in which you need it to operate.</p>
+
+		<p>Or, maybe, there are two classes that exhibit similar behavior and have
+		a significant amount of duplicate code.
 	</section>
 
-	<section>
-		<h3>Resolution</h3>
+	<section><h3>Resolution</h3>
+		<p>In the first example above, changing the class's superclass to the desired
+		external library's class would allow you to inherit everything you'd normally
+		need from it while making the modifications that keep it functioning in
+		the context of your program.</p>
+
+		<p>In the second example, you can consolidate their duplicated methods and
+		instance variables into a singular superclass, changing superclass to it. </p>
+
+		<p></p>
 	</section>
 
-	<section>
-		<h3>Related Patterns</h3>
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=pullUpVar.html>Pull Up Instance Variable</a></li>
+			<li><a>Pull Up Method</a></li>
+			<li><a href=newClass.html>Create Empty Class</a></li>
+			<li><a>Rename Class</a></li>
+		</ul>
 	</section>
 </body>
