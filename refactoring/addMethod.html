@@ -21,26 +21,64 @@
 		many situations that call for the addition of a method.
 		<p>Perhaps a few lines of code are present in multiple other methods with no differences in implementaion;
 		Maybe a class needs methods that get and set the values of instance variables;
-		maybe a class simple needs to implement a new desired functionality.</p>
+		maybe a class simple needs to implement a new desired functionality. Consider the following code:</p>
+		<code>
+			<pre>
+			public class aClass {
+				string name;
+				static string filename = "/testfile";
+
+				public static void main(String[] args){
+					this.name = "Michael";
+					writeName();
+					writeData("I can't think of example text");
+				}
+				public void writeData(string data){
+					fw = new FileWriter(filename);
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write(data);
+					bw.close;
+				}
+				public void writeName(){
+					fw = new FileWriter(filename);
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write(this.name);
+					bw.close;
+				}
+			}</pre>
+		</code>
+		<p>It's apparent that the methods writeData and writeName are largely duplicated, with only minor differences between them.</p>
 	</section>
 
 	<section><h3>Resolution</h3>
-		<p>Adding a new method to a class can consolidate code, </p>
-
+		<p>Adding the method write(string data) will provide a single place to consolidate the file stream operations.</p>
 		<code>
 			<pre>
-			function aFunction(int anArg){
-				return aFunction(anArg + 1);
+			public class aClass {
+				string name;
+				static string filename = "/testfile";
+
+				public static void main(String[] args){
+					this.name = "Michael";
+					write(this.name);
+					write("I can't think of example text");
+				}
+				public void write(string data){
+					fw = new FileWriter(filename);
+					BufferedWriter bw = new BufferedWriter(fw);
+					bw.write(data);
+					bw.close;
+				}
 			}</pre>
 		</code>
-
-		<p></p>
+		<p> Simpler and more dynamic, adding a method can greatly improve readability.</p>
 	</section>
 
 	<section><h2>Related Patterns</h2>
 		<ul>
-			<li><a href=changeSuper.html>Change Superclass</a></li>
-			<li><a href=pullUpVar.html>Pull Up Instance Variable</a></li>
+			<li><a>Delete Method</a></li>
+			<li><a>Pull Up Method</a></li>
+			<li><a>Push Down Method</a></li>
 		</ul>
 	</section>
 </body>
