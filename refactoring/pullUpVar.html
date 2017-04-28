@@ -9,7 +9,6 @@
 				<li><a href=../homepage.html>Home</a></li>
 				<li><a href=../refactoring/index.html>Refactoring</a></li>
 				<li><a href=../design/index.html>Design</a></li>
-				<li><a href=../methodology/index.html>Methodology</a></li>
 			</ul>
 		</nav>
 	</header>
@@ -30,32 +29,29 @@
 		<p>Take the following example, where class A and B share the instance variable aString:</p>
 
 		<code>
-			<p>public class A {</p>
-			<p>&emsp; private int anInteger;</p>
-			<p>&emsp; private string aString;</p>
-			<p>}</p><br>
-
-			<p>public class B {</p>
-			<p>&emsp; private int anotherInteger;</p>
-			<p>&emsp; private string aString;</p>
-			<p>}</p>
+			<pre>
+			public class A {
+				private int anInteger;
+				private string aString;
+			}
+			public class B {
+				private int anotherInteger;
+				private string aString;
+			}</pre>
 		</code>
 
 		<p>Though it's not shown, assume that aString serves the same purpose in both classes. The solution is simply:</p>
 
 		<code>
-
-			<p>public class aSuper {</p>
-			<p>&emsp; public string aString;</p>
-			<p>}</p><br>
-
-			<p>public class A extends aSuper {</p>
-			<p>&emsp; private int anInteger;</p>
-			<p>}</p><br>
-
-			<p>public class B extends aSuper {</p>
-			<p>&emsp; private int anotherInteger;</p>
-			<p>}</p>
+			public class aSuper {
+				public string aString;
+			}
+			public class A extends aSuper {
+				private int anInteger;
+			}
+			public class B extends aSuper {
+				private int anotherInteger;
+			}
 		</code>
 
 		<p>With this change, functionality of classes A and B do not change and the duplicate code is removed.</p>
