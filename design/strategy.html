@@ -1,0 +1,86 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+				<li><a href=../methodology/index.html>Methodology</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Strategy</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>An object has multiple ways of implementing a function, all of which are necessary at some point or another. </p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Rather than create a separate method for each implementation, have one method implemented by different concrete subclasses of a Strategy interface. </p>
+
+		<code>
+			<pre>
+			public interface Strategy {
+				public void handleSomething(String something);
+			}
+
+			public class StrategyDefault implements Strategy{
+				public void handleSomething(String something) {
+					System.out.println("I decide to not handle "+ something);
+				}
+			}
+			public class StrategyX implements Strategy{
+				public void handleSomething(String something) {
+					System.out.println("I want to handle "+ something +" by using method X!");
+				}
+			}
+			public class StrategyY implements Strategy{
+				public void handleSomething(String something) {
+					System.out.println("I want to handle "+ something +" by using method Y!");
+				}
+			}
+
+			public class StratExecutor {
+				private Strategy strat;
+				private String name;
+
+				public StratExecutor(Strategy aStrategy, String aName) {
+					strat = aStrategy;
+					name = aName;
+				}
+				public void setStrategy(Strategy aStrat) {
+					strat = aStrat;
+				}
+				public void doTheThing(String thing){
+					strat.handleSomething(thing);
+				}
+			}
+
+			public class Test {
+				public static void main(String[] args) {
+					StratExecutor exec = new StratExecutor(new StrategyDefault());
+					exec.doTheThing("butt"); 
+					//prints "I decide to not handle butt"
+					
+					exec.setStrategy(new StrategyX);
+					exec.doTheThing("butt"); 
+					//prints "I want to handle butt by using method X!"
+				}
+			}</pre>
+		</code>
+
+		<p></p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=factory.html>Factory Method</a></li>
+			<li><a>Bridge</a></li>
+		</ul>
+	</section>
+</body>

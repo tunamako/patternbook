@@ -17,20 +17,62 @@
 	<h2>State</h2>
 
 	<section><h3>Forces of Conflict</h3>
-		<p>An object needs to respond to messages differently depending on what state its in.</p>
+		<p>An object needs to respond to messages differently depending on what state its in, such as an online vendor only allowing paypal for payment if its credit authentication is down.</p>
 	</section>
 
 	<section><h3>Resolution</h3>
-		<p></p>
+		<p>Create a class to function as a Context, holding on to all possible internal states. When a message is sent to the outer Context, the message is forwarded to whatever the current State object is. The State object will serve as an interface for all concrete states.</p>
 
 		<code>
 			<pre>
-			function aFunction(int anArg){
-				return aFunction(anArg + 1);
+			public interface State {
+				public void doSomething(Context aContext);
+			}
+
+			public class StateOne implements State {
+				public void doSomething(Context aContext) {
+					System.out.println("Entered state one");
+					aContext.setState(this);
+				}
+				public String toString() {
+					return "One";
+				}
+			}
+			public class StateTwo implements State {
+				public void doSomething(Context aContext) {
+					System.out.println("Entered state two");
+					aContext.setState(this);
+				}
+				public String toString() {
+					return "Two";
+				}
+			}
+			public class StateThree implements State {
+				public void doSomething(Context aContext) {
+					System.out.println("Entered state three");
+					aContext.setState(this);
+				}
+				public String toString() {
+					return "Three";
+				}
+			}
+
+			public class Context {
+				private State state;
+
+				public Context(){
+					state = null;
+				}
+				public void setState(State aState) {
+					this.state = aState;
+				}
+				public void print(){
+					System.out.println(state.toString());
+				}
 			}</pre>
 		</code>
 
-		<p></p>
+		<p>By using this, calling print() on Context will return different values depending on what state it's currently in. This example is simple so it seems like the code is repeated unnecessarily, but the concept is a powerful one and can be applied in many places.</p>
 	</section>
 
 	<section><h2>Related Patterns</h2>
