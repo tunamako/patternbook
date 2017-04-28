@@ -1,0 +1,50 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+				<li><a href=../methodology/index.html>Methodology</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Singleton</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>A class only needs to exist for one instance. In certain situations, it's more efficient to have a single instance of an object handle its class' behavior across the system, rather than have multiple instances active. </p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create a class constructor that only allows one instance of itself to be active at any given time. Ideally the constructor will be private so that it may only be called once, by the class itself at runtime. </p>
+
+		<code>
+			<pre>
+			public class Singleton {
+				private static Singleton instance = new Singleton();
+
+				private void Singleton() {
+
+				}
+
+				public static Singleton getInstance() {
+					return instance;
+				}
+			}</pre>
+		</code>
+
+		<p>This way, no outside object can construct a new Singleton object, but can access the already instantiated instance through getInstance().</p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=factory.html>Factory Method</a></li>
+			<li><a href=builder.html>Builder</a></li>
+		</ul>
+	</section>
+</body>

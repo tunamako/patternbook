@@ -1,0 +1,82 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+				<li><a href=../methodology/index.html>Methodology</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Composite</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>When a grouping or assembly of primitive objects needs to be treated as if it were a single instance. Usually arises when nearly identical code is rewritten to handle slightly different objects.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create a composite class that can hold onto the primitive objects as well as other composite classes.</p>
+
+		<code>
+			<pre>
+			public class Assembly {
+				private String name;
+				private List<\Assembly> subAssemblies;
+
+				public Assembly(String aName){
+					this.name = aName;
+					subAssemblies = new ArrayList<\Assembly>();
+				}
+
+				public void add(Assembly anAssembly) {
+					subAssemblies.add(anAssembly);
+				}
+				public void remove(Assembly anAssembly) {
+					subAssemblies.remove(anAssembly);
+				}
+
+				public int count() {
+					return subAssemblies.size();
+				}
+
+				public void announce(){
+					System.out.println("I'm an assembly named "+ this.name + " with "+ this.count() + "sub-assemblies!");
+
+					for(Assembly a : subAssemblies) {
+						a.announce();
+					}
+				}
+			}
+
+			public class Test {
+				public static void main(String[] args) {
+					Assembly A = new Assembly("A");
+					Assembly B = new Assembly("B");
+					Assembly C = new Assembly("C");
+					Assembly D = new Assembly("D");
+
+					A.add(B);
+					A.add(C);
+					B.add(D);
+
+					A.announce(); //Should print 4 lines in total
+				}			
+			}</pre>
+		</code>
+
+		<p>In this way, all four assemblies A, B, C, and D can be referred to with a single call to announce().</p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=command.html>Command</a></li>
+			<li><a href=decorator.html>Decorator</a></li>
+		</ul>
+	</section>
+</body>

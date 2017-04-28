@@ -1,0 +1,87 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+				<li><a href=../methodology/index.html>Methodology</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Command</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>An action is requested by a user or another part of the system and all behaviors required to perform that request need to be organized elegantly. The behaviors may also need to be dynamically configurable.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create a single object to encapsulate all behaviors to execute a request idempotently from whoever requested it. Sometimes named 'execute' or 'run'.</p>
+		<p>Below, consider the instance where we have a button that activates some underlying mechanism and alerts a login session to the fact that it was pressed. In this case, the mechanism simply prints to the console, but could easily be extended to many different functionalities.</p>
+		<code>
+			<pre>
+			public interface Command {
+				void run();
+			}
+
+			public class Button {
+				public void run(Command cmd, Session aSession){
+					aSession.alert();
+					cmd.run();
+				}
+			}
+
+			public class Mechanism {
+				private string label;
+
+				public void pressDown() {
+					System.out.println("You pushed " + label + "!");
+				}
+
+				public void release() {
+					System.out.println("You released " + label + "!");
+				}
+			}
+
+			public class Press implements Command {
+				private Mechanism mechanism;
+
+				public Press(Mechanism aMechanism){
+					this.mechanism = aMechanism;
+				}
+
+				@Override
+				public void run() {
+					this.mechanism.pressDown() {}
+				}
+			}
+
+			public class Release implements Command {
+				private Mechanism mechanism;
+
+				public Release(Mechanism aMechanism){
+					this.mechanism = aMechanism;
+				}
+
+				@Override
+				public void run() {
+					this.mechanism.release() {}
+				}
+			}</pre>
+		</code>
+
+		<p></p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=chain.html>Chain of Responsibility</a></li>
+			<li><a href=composite.html>Composite</a></li>
+		</ul>
+	</section>
+</body>

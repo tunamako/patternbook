@@ -30,33 +30,32 @@
 		<p>Take the following example, where class A and B share the instance variable aString:</p>
 
 		<code>
-			<pre>
-			public class A {
-				private int anInteger;
-				private string aString;
-			}
+			<p>public class A {</p>
+			<p>&emsp; private int anInteger;</p>
+			<p>&emsp; private string aString;</p>
+			<p>}</p><br>
 
-			public class B {
-				private int anotherInteger;
-				private string aString;
-			}</pre>
+			<p>public class B {</p>
+			<p>&emsp; private int anotherInteger;</p>
+			<p>&emsp; private string aString;</p>
+			<p>}</p>
 		</code>
 
 		<p>Though it's not shown, assume that aString serves the same purpose in both classes. The solution is simply:</p>
 
 		<code>
-			<pre>
-			public class aSuper {
-				public string aString;
-			}
 
-			public class A extends aSuper {
-				private int anInteger;
-			}
+			<p>public class aSuper {</p>
+			<p>&emsp; public string aString;</p>
+			<p>}</p><br>
 
-			public class B extends aSuper {
-				private int anotherInteger;
-			}</pre>
+			<p>public class A extends aSuper {</p>
+			<p>&emsp; private int anInteger;</p>
+			<p>}</p><br>
+
+			<p>public class B extends aSuper {</p>
+			<p>&emsp; private int anotherInteger;</p>
+			<p>}</p>
 		</code>
 
 		<p>With this change, functionality of classes A and B do not change and the duplicate code is removed.</p>
@@ -66,8 +65,6 @@
 		<ul>
 			<li><a href=newClass.html>Create Empty Class</a></li>
 			<li><a href=changeSuper.html>Change Superclass</a></li>
-			<li><a>Add Instance Variable</a></li>
-			<li><a>Delete Instance Variable</a></li>
 		</ul>
 	</section>
 </body>

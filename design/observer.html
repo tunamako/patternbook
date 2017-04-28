@@ -1,0 +1,71 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+				<li><a href=../methodology/index.html>Methodology</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Observer</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>There exists an object that will morph and be modified over the course of runtime, as well as a series of objects that need to react and update themselves according to the state of that modified object.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Allow the base object to track a list of 'observers' that need to be aware of its changes. Implement an 'update' method to be called whenever the object changes in a way that's relevant to possible observers. Ideally, keep information about observers obfuscated from the base object to promote modularity.</p>
+		
+		<code>
+			<pre>
+			public class Observer {
+				private nameHolder watching;
+				private string myname;
+
+				public static void observe(nameHolder anObject){
+					this.watching = anObject;
+					anObject.addObserver(this);
+				}
+
+				public static void update() {
+					this.myname = this.watching.aName + myname;
+				}
+			}
+
+			public class nameHolder {
+				private string name;
+				private Observers = new ArrayList<\Observer>();
+
+				public static void addObserver(Observer anObserver) {
+					this.Observers.add(anObserver);
+				}
+
+				public static void update(){
+					for(Observer i : Observers){
+						i.update();
+					}
+				}
+
+				public static void changeName(string newName){
+					this.name = newName;
+					this.update();
+				}
+			}</pre>
+		</code>
+
+		<p>In the above, whenever a change is made to the nameHolder's name variable, it will tell itself to update its status to all of its observers without caring about who the observers are or what they are doing with the information.</p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=>Facade</a></li>
+		</ul>
+	</section>
+</body>

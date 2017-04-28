@@ -23,29 +23,29 @@
 		Maybe a class needs methods that get and set the values of instance variables;
 		maybe a class simple needs to implement a new desired functionality. Consider the following code:</p>
 		<code>
-			<pre>
-			public class aClass {
-				string name;
-				static string filename = "/testfile";
+			<p>public class aClass {
+			<p>&emsp; string name;</p>
+			<p>&emsp; static string filename = "/testfile";</p>
+			<p>&emsp; public static void main(String[] args){</p>
+			<p>&emsp;&emsp; this.name = "Michael";</p>
+			<p>&emsp;&emsp; writeName();</p>
+			<p>&emsp;&emsp; writeData("I can't think of example text");</p>
+			<p>&emsp; }</p><br>
 
-				public static void main(String[] args){
-					this.name = "Michael";
-					writeName();
-					writeData("I can't think of example text");
-				}
-				public void writeData(string data){
-					fw = new FileWriter(filename);
-					BufferedWriter bw = new BufferedWriter(fw);
-					bw.write(data);
-					bw.close;
-				}
-				public void writeName(){
-					fw = new FileWriter(filename);
-					BufferedWriter bw = new BufferedWriter(fw);
-					bw.write(this.name);
-					bw.close;
-				}
-			}</pre>
+			<p>&emsp; public void writeData(string data){</p>
+			<p>&emsp;&emsp; fw = new FileWriter(filename);</p>
+			<p>&emsp;&emsp; BufferedWriter bw = new BufferedWriter(fw);</p>
+			<p>&emsp;&emsp; bw.write(data);</p>
+			<p>&emsp;&emsp; bw.close;</p>
+			<p>&emsp; }</p><br>
+
+			<p>&emsp; public void writeName(){</p>
+			<p>&emsp;&emsp; fw = new FileWriter(filename);</p>
+			<p>&emsp;&emsp; BufferedWriter bw = new BufferedWriter(fw);</p>
+			<p>&emsp;&emsp; bw.write(this.name);</p>
+			<p>&emsp;&emsp; bw.close;</p>
+			<p>&emsp; }</p>
+			<p>}</p>
 		</code>
 		<p>It's apparent that the methods writeData and writeName are largely duplicated, with only minor differences between them.</p>
 	</section>
@@ -53,32 +53,23 @@
 	<section><h3>Resolution</h3>
 		<p>Adding the method write(string data) will provide a single place to consolidate the file stream operations.</p>
 		<code>
-			<pre>
-			public class aClass {
-				string name;
-				static string filename = "/testfile";
+			<p>public class aClass {</p>
+			<p>&emsp; string name;</p>
+			<p>&emsp; static string filename = "/testfile";</p>
+			<p>&emsp; public static void main(String[] args){</p>
+			<p>&emsp;&emsp; this.name = "Michael";</p>
+			<p>&emsp;&emsp; write(this.name);</p>
+			<p>&emsp;&emsp; write("I can't think of example text");</p>
+			<p>&emsp; }</p><br>
 
-				public static void main(String[] args){
-					this.name = "Michael";
-					write(this.name);
-					write("I can't think of example text");
-				}
-				public void write(string data){
-					fw = new FileWriter(filename);
-					BufferedWriter bw = new BufferedWriter(fw);
-					bw.write(data);
-					bw.close;
-				}
-			}</pre>
+			<p>&emsp; public void write(string data){</p>
+			<p>&emsp;&emsp; fw = new FileWriter(filename);</p>
+			<p>&emsp;&emsp; BufferedWriter bw = new BufferedWriter(fw);</p>
+			<p>&emsp;&emsp; bw.write(data);</p>
+			<p>&emsp;&emsp; bw.close;</p>
+			<p>&emsp; }</p>
+			<p>}</p>
 		</code>
-		<p> Simpler and more dynamic, adding a method can greatly improve readability.</p>
-	</section>
-
-	<section><h2>Related Patterns</h2>
-		<ul>
-			<li><a>Delete Method</a></li>
-			<li><a>Pull Up Method</a></li>
-			<li><a>Push Down Method</a></li>
-		</ul>
+		<p>Simpler and more dynamic, adding a method can greatly improve readability.</p>
 	</section>
 </body>

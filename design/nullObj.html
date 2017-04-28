@@ -1,0 +1,61 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+				<li><a href=../methodology/index.html>Methodology</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Null Object</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>When an edge case for a system needs to be easily detected without the excessive use of conditional statements, such as iterating along a path of objects until a null instance is reached.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create a subclass for each class that has the possibility of edge cases, where this subclass is a 'null' version of its superclass. The null class will serve as an interface, implementing the same methods and instance variables as the superclass, but using different implementations as to respond differently when accessed.</p>
+
+		<code>
+			<pre>
+			public interface Example{
+				bool isNull();
+				string printData();
+			}
+
+			public class ExampleObject implements Example {
+				private string data;
+
+				public bool isNull() {
+					return false;
+				}
+				public string printData() {
+					System.out.println(data);
+				}
+			}
+
+			public class NullObject implements Example {
+				public static bool isNull() {
+					return true;
+				}
+				public static string printData() {
+
+				}
+			}</pre>
+		</code>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=state.html>State</a></li>
+			<li><a href=strategy.html>Strategy</a></li>
+		</ul>
+	</section>
+</body>
