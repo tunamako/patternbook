@@ -1,0 +1,99 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Builder</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>An object has many different possible initial states and making a constructor for each one would be inefficient and difficult to maintain.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Separate the representation of the object from its constituents by creating a Builder object that implements messages for setting the values of the object to be constructed. In the below example, imagine we want to create a new animal which may or may not have various attributes.</p>
+
+		<code>
+			<pre>
+			public class Animal {
+				private int legCount;
+				private bool hasTail;
+				private string color;
+
+				public Animal() {}
+
+				public void setLegs(int aCount) {
+					legCount = aCount;
+				}
+				public int getLegs() {
+					return legCount;
+				}
+				public void setTail(bool aBool) {
+					hasTail = aBool;
+				}
+				public bool hasTail() {
+					return hasTail;
+				}
+				public void setColor(string aColor) {
+					color = aColor;
+				}
+				public string getColor() {
+					return color;
+				}
+			}
+
+			public class AnimalBuilder {
+				private Animal animal;
+
+				public AnimalBuilder() {
+					animal = new Animal();
+				}
+
+				public void setLegs(int aCount) {
+					animal.setLegs(aCount);
+				}
+				public void setTail(bool aBool) {
+					animal.setTail(aBool);
+				}
+				public void setColor(string aColor) {
+					animal.setColor(aColor);
+				}
+
+				public Animal build() {
+					return animal;
+				}
+			}
+
+			public class Test {
+				public static void main(String[] args) {
+					AnimalBuilder builder = new AnimalBuilder();
+
+					builder.setLegs(3);
+					builder.setTail(true);
+					builder.setColor("red");
+					Animal myAnimal = builder.build();
+				}
+			}</pre>
+		</code>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=singleton.html>Singleton</a></li>
+			<li><a href=visitor.html>Visitor</a></li>
+			<li><a href=composite.html>Composite</a></li>
+			<li><a>Prototype</a></li>
+			<li><a>Factory Method</a></li>
+
+		</ul>
+	</section>
+</body>

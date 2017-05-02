@@ -1,0 +1,90 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Facade</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>A complex set of subsystems needs to be operated by an external object while also having those implementations be hidden from said object. A system needs to be made more modular and polymorphic.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create a facade class to abstract away the details of how a process is implemented, simplifying it for anything that needs to access that process. For example, if a server is being run and the only apparent functionality is the ability to start and stop it. All details about opening sockets and IP can be hidden from the accessor.</p>
+
+		<code>
+			<pre>
+			public class ClientList {
+				private Map list;
+
+				public ClientList () {
+					list = new Map();
+				}
+
+				public void add(int fileDescriptor, string name) {
+					list.put(fileDescriptor, name);
+				}
+				public void remove(int fileDescriptor) {
+					list.remove(fileDescriptor);
+				}
+			}
+
+			public class Server {
+				private int sock;
+				
+				public Server(int port) {
+					sock = makeSocket(port);
+				}
+
+				private int makeSocket(int port) {...}
+				private int acceptConnection() {...}
+
+				public void run() {
+					while(true)
+						acceptConnection();
+				}
+			}
+
+			public class ServerFacade {
+				private Server server;
+				private ClientList clients;
+
+				public ServerFacade(int port){
+					this.server = new Server(port);
+					this.clients = new ClientList();
+				}
+
+				public void start() {
+					server.run();
+				}
+			}
+
+			public class Test {
+				public static void main(String[] args) {
+					ServerFacade server = new ServerFacade(12000);
+
+					server.start();
+				}
+			}</pre>
+		</code>
+
+		<p>Though it's barebones, this shows that the Test class can interact with the ServerFacade without needing to worry about its clients or connectivity</p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=decorator.html>Decorator</a></li>
+			<li><a href=composite.html>Composite</a></li>
+		</ul>
+	</section>
+</body>

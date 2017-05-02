@@ -1,0 +1,94 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Decorator</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>The capabilities and functionality of an object needs to be dynamic at runtime, allowing for behaviors to be added and removed. Imagine a paper company needs to print many different types of paper, and each of those types of paper might be further transformed to have textured borders or watermarks. </p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create a base </p>
+
+		<code>
+			<pre>
+
+			public class Paper {
+				public void create() {
+					System.out.println("Made a sheet of 8.5x11 paper");
+				}
+			}
+
+			public abstract class PaperDecorator implements Paper {
+				public Paper paper;
+				public PaperDecorator(Paper paper){
+					this.paper = paper;
+				}
+				public void create(){
+					paper.create();
+				}	
+			}
+
+			public class WatermarkDecorator extends PaperDecorator {
+				public WatermarkDecorator(Paper paper) {
+					super(paper);		
+				}
+
+				@Override
+				public void create() {
+					paper.create();	       
+					addWatermark(paper);
+				}
+				private void addWatermark(Paper paper){
+					System.out.println("Added watermark to a paper");
+				}
+			}
+			public class TextureDecorator extends PaperDecorator {
+				public TextureDecorator(Paper paper) {
+					super(paper);		
+				}
+
+				@Override
+				public void create() {
+					paper.create();	       
+					addWatermark(paper);
+				}
+				private void addTexture(Paper paper){
+					System.out.println("Added a texture to a paper");
+				}
+			}
+
+			public class Test {
+				public static void main(String[] args) {
+					Paper printerPaper = new Letter();
+					Paper textured = new TextureDecorator(new Letter());
+					Paper watermarkAndTextured = new WatermarkDecorator(new TextureDecorator(new Letter()));
+				}
+			}
+
+			</pre>
+		</code>
+
+		<p>This arrangement allows for many options and possible attributes to be added to a single object well after it has been created.</p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=composite.html>Composite</a></li>
+			<li><a href=facade.html>Facade</a></li>
+			<li><a href=state.html>State</a></li>
+		</ul>
+	</section>
+</body>

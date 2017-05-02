@@ -1,0 +1,71 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Visitor</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>There is an arrangement of objects that needs to be traversed in order to gather some kind of meaningful data from them, such as a GUI for a game client, or a semantic interpreter running through code.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create a Visitor class which has a series of methods corresponding to each object it will visit, dictating how it will behave when it has a hold of said object. Implement a message "accept" on each object along the possible paths for traversal, taking in the visitor as an argument. "accept" will then send itself in a message back to the Visitor class. This pattern makes heavy use of double dispatch.</p>
+
+		<code>
+			<pre>
+			public class Visitor {
+				public void visitObjectA(ObjectA A){
+					System.out.println("I'm visiting object A!");
+					A.next.accept(this);
+				}
+				public void visitObjectB(ObjectB B){
+					System.out.println("I'm visiting object B!");
+				}
+			}
+
+			public class ObjectA {
+				private ObjectB next;
+				public ObjectA(){
+					next = new ObjectB();
+				}
+				public void accept(Visitor aVisitor){
+					aVisitor.visitObjectA(this);
+				}
+			}
+			public class ObjectB {
+				public void accept(Visitor aVisitor){
+					aVisitor.visitObjectB(this);
+				}
+			}
+
+			public class Test {
+				public static void main(String[] args){
+					Visitor aVisitor = new Visitor();
+					ObjectA A = new ObjectA();
+
+					A.accept(aVisitor);
+				}
+			}</pre>
+		</code>
+
+		<p>This way, the base arrangement of objects doesnt need to worry about how its structure and data will be used, instead leaving that responsibility to a visitor. </p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=builder.html>Builder</a></li>
+			<li><a>Double Dispatch</a></li>
+		</ul>
+	</section>
+</body>

@@ -1,0 +1,78 @@
+<title>Pattern Book</title>
+<link rel="stylesheet" type="text/css" href="../css/main.css">
+<body>
+	<header>
+		<h1>CS326 Patternbook</h1>
+		<p>Michael Whalen</p>
+		<nav>
+			<ul>
+				<li><a href=../homepage.html>Home</a></li>
+				<li><a href=../refactoring/index.html>Refactoring</a></li>
+				<li><a href=../design/index.html>Design</a></li>
+			</ul>
+		</nav>
+	</header>
+
+	<h2>Template Method</h2>
+
+	<section><h3>Forces of Conflict</h3>
+		<p>It's possible that an algorithm can be applied to multiple scenarios, but each scenario requires slightly different steps from the others. Rewriting the algorithm for each would be redundant, since the bulk of the algorithm is the same for everything.</p>
+	</section>
+
+	<section><h3>Resolution</h3>
+		<p>Create an abstract class to contain the algorithm separated into steps according to which sections might vary, with each step being its own method. That way, the objects that implement the algorithm can implement the interface and override the steps that need to be unique.</p>
+
+		<code>
+			<pre>
+			public class Algorithm {
+				public void stepOne();
+				private void stepTwo() {
+					System.out.println("This step is the same for all")
+				}
+				private void stepThree(){
+					System.out.println("This step is the same for all")
+				}
+				private void stepFour(){
+					System.out.println("This step is the same for all")
+				}
+				public void run(){
+					stepOne();
+					stepTwo();
+					stepThree();
+					stepFour();
+				}
+			}
+
+			public class ApplicationA extends Algorithm{
+				@Override
+				public void stepOne() {
+					System.out.println("This step is special for version A");
+				}
+			}
+			public class ApplicationB extends Algorithm {
+				@Override
+				public void stepOne() {
+					System.out.println("This step is special for version B");
+				}
+
+			public class Test {
+				public static void main(String[] args) {
+					Algorithm A = new ApplicationA();
+					Algorithm B = new ApplicationB();
+
+					A.run();
+					B.run();
+					//first step will be different between them
+				}
+			}</pre>
+		</code>
+
+		<p></p>
+	</section>
+
+	<section><h2>Related Patterns</h2>
+		<ul>
+			<li><a href=strategy.html>Strategy</a></li>
+		</ul>
+	</section>
+</body>
